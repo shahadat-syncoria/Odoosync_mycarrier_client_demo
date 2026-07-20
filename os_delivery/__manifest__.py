@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Odoo Sync Delivery",
-    "version": "18.1.2",
+    "version": "18.1.3",
     'summary': """
         Dependency Module of Odoo Sync Base for delivery functionality""",
     'description': """
@@ -30,7 +30,8 @@
         'delivery_apps/delivery_mycarrier/data/ir_sequence_data.xml',
         'delivery_apps/delivery_mycarrier/views/mycarrier_instance_view.xml',
         'delivery_apps/delivery_mycarrier/views/mycarrier_webhook_view.xml',
-        'delivery_apps/delivery_mycarrier/views/stock_picking_view.xml'
+        'delivery_apps/delivery_mycarrier/views/stock_picking_view.xml',
+        'delivery_apps/delivery_mycarrier/views/product_template_view.xml'
         
     ],
     "support": "support@syncoria.com",
