@@ -35,6 +35,9 @@
                         <group>
                             <field name="name"/>
                             <field name="delivery_product_id" required="1"/>
+                            <field name="location_source"/>
+                            <field name="auto_validate_picking"/>
+                            <field name="auto_validate_timing" invisible="not auto_validate_picking"/>
                         </group>
                         <notebook>
                             <page string="Credentials">
@@ -49,6 +52,22 @@
                                         <field name="product_id"/>
                                         <field name="sku" />
                                         <field name="mycarrier_product_id" />
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Warehouse Mapping" invisible="location_source != 'warehouse'">
+                                <field name="warehouse_mapping_ids">
+                                    <list edit="1" create="1" delete="1" editable="bottom">
+                                        <field name="warehouse_id"/>
+                                        <field name="mycarrier_location_id"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Location Mapping" invisible="location_source != 'location'">
+                                <field name="location_mapping_ids">
+                                    <list edit="1" create="1" delete="1" editable="bottom">
+                                        <field name="location_id"/>
+                                        <field name="mycarrier_location_id"/>
                                     </list>
                                 </field>
                             </page>

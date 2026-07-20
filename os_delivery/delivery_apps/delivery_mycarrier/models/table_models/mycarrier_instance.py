@@ -57,6 +57,65 @@ class MycarrierInstance(models.Model):
         help="""Delivery product used for shipping method creation.""",
     )
 
+    location_source = fields.Selection([
+        ('warehouse', 'Warehouse'),
+        ('location', 'Location')],
+        string='Location ID Source', default='warehouse', required=True,
+        help="Where the origin locationID sent to MyCarrier comes from:\n"
+             "Warehouse: looked up in the Warehouse Mapping tab by the picking's warehouse.\n"
+             "Location: looked up in the Location Mapping tab by the picking's source location.")
+
+    warehouse_mapping_ids = fields.One2many('mycarrier.warehouse.mappings', inverse_name='mycarrier_instance_id')
+
+    location_mapping_ids = fields.One2many('mycarrier.location.mappings', inverse_name='mycarrier_instance_id')
+
+    auto_validate_picking = fields.Boolean(
+        'Auto-Validate Picking on MyCarrier Confirmation', default=True,
+        help="When MyCarrier's webhook confirms a shipment, automatically validate the picking. "
+             "If off, the webhook still fills in PRO/BOL/cost and logs the update, but leaves "
+             "the picking for manual validation.")
+
+    auto_validate_timing = fields.Selection([
+        ('immediate', 'Immediately on Confirmation'),
+        ('pickup_date', 'Wait Until Pickup Date')],
+        string='Validate Timing', default='pickup_date', required=True,
+        help="Immediately: validate as soon as MyCarrier confirms the shipment.\n"
+             "Wait Until Pickup Date: hold off validating until the confirmed PickupDate "
+             "has actually arrived (matches physical pickup, but the picking sits in "
+             "'MyCarrier' state until then). Client's call - confirm before go-live.")
+
+
+class MycarrierWarehouseMappings(models.Model):
+    _name = 'mycarrier.warehouse.mappings'
+
+    _description = 'MyCarrier Warehouse Mappings'
+
+    warehouse_id = fields.Many2one('stock.warehouse', string='Warehouse', required=True)
+
+    mycarrier_location_id = fields.Char(string='MyCarrier Location ID', required=True)
+
+    mycarrier_instance_id = fields.Many2one('mycarrier.instance')
+
+    _sql_constraints = [
+        ('warehouse_uniq', 'unique (warehouse_id, mycarrier_instance_id)', "Warehouse must be unique.")
+    ]
+
+
+class MycarrierLocationMappings(models.Model):
+    _name = 'mycarrier.location.mappings'
+
+    _description = 'MyCarrier Location Mappings'
+
+    location_id = fields.Many2one('stock.location', string='Location', required=True)
+
+    mycarrier_location_id = fields.Char(string='MyCarrier Location ID', required=True)
+
+    mycarrier_instance_id = fields.Many2one('mycarrier.instance')
+
+    _sql_constraints = [
+        ('location_uniq', 'unique (location_id, mycarrier_instance_id)', "Location must be unique.")
+    ]
+
 
 class MycarrierRegisteredWebhook(models.Model):
     _name = 'mycarrier.registered.webhooks'

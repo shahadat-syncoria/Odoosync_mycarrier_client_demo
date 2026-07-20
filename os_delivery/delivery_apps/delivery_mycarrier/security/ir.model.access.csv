@@ -5,3 +5,5 @@ access_mycarrier_webhook,access.mycarrier.webhook,model_mycarrier_webhook,base.g
 access_mycarrier_registered_webhooks,access.mycarrier.registered.webhooks,model_mycarrier_registered_webhooks,base.group_user,1,1,1,1
 access_mycarrier_accessorials,access.mycarrier.accessorials,model_mycarrier_accessorials,base.group_user,1,1,1,1
 access_mycarrier_location_type,access.mycarrier.location.type,model_mycarrier_location_type,base.group_user,1,1,1,1
+access_mycarrier_warehouse_mappings,access.mycarrier.warehouse.mappings,model_mycarrier_warehouse_mappings,base.group_user,1,1,1,1
+access_mycarrier_location_mappings,access.mycarrier.location.mappings,model_mycarrier_location_mappings,base.group_user,1,1,1,1

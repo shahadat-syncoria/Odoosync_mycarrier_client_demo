@@ -19,15 +19,14 @@
                     <field name="destination_country_code" invisible="1"/>
                     <field name="total_weight_done" invisible="1"/>
                     <field name="pushed_to_mycarrier" invisible="1"/>
-                    <button string="Create Mycarrier quote" type="object" name="create_mycarrier_quote"
+                    <button string="Create Mycarrier quote" type="object" name="create_mycarrier_quote_by_package"
                             invisible="pushed_to_mycarrier"/>
-                    <button string="Update Mycarrier quote" type="object" name="create_mycarrier_quote"
+                    <button string="Update Mycarrier quote" type="object" name="create_mycarrier_quote_by_package"
                             invisible="state != 'mycarrier'"/>
                 </xpath>
                 <xpath expr="//notebook" position="inside">
                     <page string="MyCarrier">
                         <group>
-
                             <group string="Origin">
                                 <field name="origin_location_type"
                                        options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
@@ -46,10 +45,15 @@
                                 <field name="dest_inside_delivery"/>
                                 <field name="dest_delivery_appointment"/>
                             </group>
-                            <group>
+                        </group>
+                        <group>
+                            <group string="Send to MyCarrier">
+                                <field name="mycarrier_po_number" readonly="pushed_to_mycarrier"/>
+                                <field name="mycarrier_customer_bol_number" readonly="pushed_to_mycarrier"/>
+                                <field name="mycarrier_special_instructions" readonly="pushed_to_mycarrier"/>
+                            </group>
+                            <group string="MyCarrier Tracking">
                                 <field name="mycarrier_shipment_id" readonly="1"/>
-                                <field name="mycarrier_customer_bol_number" readonly="1"/>
-                                <field name="mycarrier_po_number" readonly="1"/>
                                 <field name="mycarrier_ref_number" readonly="1"/>
                                 <field name="mycarrier_pickup_number" readonly="1"/>
                                 <field name="mycarrier_carrier_code" readonly="1"/>
@@ -58,7 +62,6 @@
                                 <field name="mycarrier_total_cost" readonly="1"/>
                             </group>
                         </group>
-
                     </page>
                 </xpath>
                 <xpath expr="//page[@name='operations']/field[@name='move_ids_without_package']/list/field[@name='product_id']"

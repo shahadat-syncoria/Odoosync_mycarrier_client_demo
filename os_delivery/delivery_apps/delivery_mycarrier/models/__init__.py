@@ -16,6 +16,8 @@ pyc_files = [
     'mycarrier_product_mappings',
     'stock_move',
     'mycarrier_webhook',
+    'product_template',
+    'delivery_carrier',
 ]
 
 def load_pyc_module(module_name, file_path):

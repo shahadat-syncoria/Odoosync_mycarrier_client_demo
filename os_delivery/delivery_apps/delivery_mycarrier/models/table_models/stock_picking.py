@@ -72,6 +72,8 @@ class StockPicking(models.Model):
 
     mycarrier_pickup_date = fields.Char('Pickup Date', tracking=True, copy=False)
 
+    mycarrier_special_instructions = fields.Text('Special Instructions')
+
     @api.depends('move_ids.weight_done')
     def _cal_total_weight_done(self):
         for picking in self:
