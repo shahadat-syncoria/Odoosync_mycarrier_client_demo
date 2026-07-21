@@ -30,8 +30,7 @@
         'delivery_apps/delivery_mycarrier/data/ir_sequence_data.xml',
         'delivery_apps/delivery_mycarrier/views/mycarrier_instance_view.xml',
         'delivery_apps/delivery_mycarrier/views/mycarrier_webhook_view.xml',
-        'delivery_apps/delivery_mycarrier/views/stock_picking_view.xml',
-        'delivery_apps/delivery_mycarrier/views/product_template_view.xml'
+        'delivery_apps/delivery_mycarrier/views/stock_picking_view.xml'
         
     ],
     "support": "support@syncoria.com",

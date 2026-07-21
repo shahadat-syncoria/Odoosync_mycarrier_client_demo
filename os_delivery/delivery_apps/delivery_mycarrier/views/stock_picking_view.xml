@@ -60,6 +60,9 @@
                                 <field name="mycarrier_carrier_name" readonly="1"/>
                                 <field name="mycarrier_pro_number" readonly="1"/>
                                 <field name="mycarrier_total_cost" readonly="1"/>
+                                <field name="mycarrier_pickup_date" readonly="1"/>
+                                <field name="mycarrier_transit_time" readonly="1"/>
+                                <field name="mycarrier_estimated_delivery_date" readonly="1"/>
                             </group>
                         </group>
                     </page>

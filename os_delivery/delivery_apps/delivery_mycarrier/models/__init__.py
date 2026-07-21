@@ -1,15 +1,17 @@
-from . import table_models
-
 import importlib
+import importlib.abc
+import importlib.machinery
 import importlib.util
 import os
 import sys
 
 base_path = os.path.dirname(__file__)
-
 py_version = f"{sys.version_info.major}_{sys.version_info.minor}"
-version_folder = py_version
+strip_python = py_version.replace('_', '')
 
+package_imports = [
+    'table_models',
+]
 pyc_files = [
     'mycarrier_instance',
     'stock_picking',
@@ -20,17 +22,43 @@ pyc_files = [
     'delivery_carrier',
 ]
 
-def load_pyc_module(module_name, file_path):
-    spec = importlib.util.spec_from_file_location(module_name, file_path)
-    module = importlib.util.module_from_spec(spec)
-    sys.modules[module_name] = module
-    spec.loader.exec_module(module)
+class _VersionedPycFinder(importlib.abc.MetaPathFinder):
+    def __init__(self, package_name, package_path):
+        self.package_name = package_name
+        self.package_path = package_path
+
+    def find_spec(self, fullname, path=None, target=None):
+        prefix = f"{self.package_name}."
+        if not fullname.startswith(prefix):
+            return None
+        child_name = fullname[len(prefix):]
+        if "." in child_name:
+            return None
+        if os.path.isdir(os.path.join(self.package_path, child_name)):
+            return None
+        file_path = os.path.join(
+            self.package_path,
+            '__pycache__',
+            f"{child_name}.cpython-{strip_python}.pyc",
+        )
+        if not os.path.exists(file_path):
+            return None
+        loader = importlib.machinery.SourcelessFileLoader(fullname, file_path)
+        return importlib.util.spec_from_file_location(fullname, file_path, loader=loader)
+
+def _install_versioned_pyc_finder():
+    for finder in sys.meta_path:
+        if (
+            getattr(finder, 'package_name', None) == __name__
+            and getattr(finder, 'package_path', None) == base_path
+        ):
+            return
+    sys.meta_path.insert(0, _VersionedPycFinder(__name__, base_path))
+
+_install_versioned_pyc_finder()
+
+for package_name in package_imports:
+    importlib.import_module(f"{__name__}.{package_name}")
 
 for file_name in pyc_files:
-    module_name = f"{__name__}.{file_name}"
-    strip_python = py_version.replace('_', '')
-    file_path = os.path.join(base_path, '__pycache__', f"{file_name}.cpython-{strip_python}.pyc")
-    if os.path.exists(file_path):
-        load_pyc_module(module_name, file_path)
-    else:
-        importlib.import_module(module_name)
+    importlib.import_module(f"{__name__}.{file_name}")
