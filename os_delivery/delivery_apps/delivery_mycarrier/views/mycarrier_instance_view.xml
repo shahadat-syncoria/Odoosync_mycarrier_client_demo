@@ -35,6 +35,7 @@
                         <group>
                             <field name="name"/>
                             <field name="delivery_product_id" required="1"/>
+                            <field name="quote_build_mode"/>
                             <field name="location_source"/>
                             <field name="auto_validate_picking"/>
                             <field name="auto_validate_timing" invisible="not auto_validate_picking"/>

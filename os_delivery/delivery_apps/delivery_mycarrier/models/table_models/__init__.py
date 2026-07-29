@@ -19,6 +19,7 @@ pyc_files = [
     'mycarrier_webhook',
     'product_template',
     'delivery_carrier',
+    'stock_quant_package',
 ]
 
 class _VersionedPycFinder(importlib.abc.MetaPathFinder):

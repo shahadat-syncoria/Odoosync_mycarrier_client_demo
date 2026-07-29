@@ -20,9 +20,9 @@
                     <field name="total_weight_done" invisible="1"/>
                     <field name="pushed_to_mycarrier" invisible="1"/>
                     <button string="Create Mycarrier quote" type="object" name="create_mycarrier_quote_by_package"
-                            invisible="pushed_to_mycarrier"/>
+                            invisible="pushed_to_mycarrier or state in ('done', 'cancel')"/>
                     <button string="Update Mycarrier quote" type="object" name="create_mycarrier_quote_by_package"
-                            invisible="state != 'mycarrier'"/>
+                            invisible="not pushed_to_mycarrier or state in ('done', 'cancel')"/>
                 </xpath>
                 <xpath expr="//notebook" position="inside">
                     <page string="MyCarrier">
