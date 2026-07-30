@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Odoo Sync Delivery",
-    "version": "18.1.4",
+    "version": "18.1.5",
     'summary': """
         Dependency Module of Odoo Sync Base for delivery functionality""",
     'description': """

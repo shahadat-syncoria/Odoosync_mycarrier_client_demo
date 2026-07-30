@@ -8,7 +8,9 @@
             <field name="inherit_id" ref="product.product_template_form_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//group[@name='group_lots_and_weight']" position="after">
-                    <group string="MyCarrier" name="mycarrier_commodity">
+                    <field name="mycarrier_quote_build_mode" invisible="1"/>
+                    <group string="MyCarrier" name="mycarrier_commodity"
+                           invisible="mycarrier_quote_build_mode != 'product'">
                         <field name="mycarrier_commodity_class"/>
                         <field name="mycarrier_commodity_nmfc"/>
                         <field name="mycarrier_commodity_sub"/>

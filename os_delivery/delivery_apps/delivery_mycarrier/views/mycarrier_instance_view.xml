@@ -72,6 +72,28 @@
                                     </list>
                                 </field>
                             </page>
+                            <page string="Default Accessorials">
+                                <group>
+                                    <group string="Origin">
+                                        <field name="default_origin_location_type"
+                                               options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                        <field name="default_origin_inside_pickup"/>
+                                        <field name="default_origin_liftgate_pickup"/>
+                                        <field name="default_origin_protect_from_freeze"/>
+                                        <field name="default_origin_single_shipment"/>
+                                        <field name="default_origin_inbond_freight"/>
+                                    </group>
+                                    <group string="Destination">
+                                        <field name="default_dest_location_type"
+                                               options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                        <field name="default_dest_delivery_appointment"/>
+                                        <field name="default_dest_inside_delivery"/>
+                                        <field name="default_dest_liftgate_delivery"/>
+                                        <field name="default_dest_notify_delivery"/>
+                                        <field name="default_dest_sort_segregate_delivery"/>
+                                    </group>
+                                </group>
+                            </page>
                             <page string="Webhooks">
                                 <field name="registered_webhook_ids" readonly="1">
                                     <list>
