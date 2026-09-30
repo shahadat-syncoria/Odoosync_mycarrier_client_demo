@@ -10,7 +10,6 @@ py_version = f"{sys.version_info.major}_{sys.version_info.minor}"
 strip_python = py_version.replace('_', '')
 
 package_imports = [
-    'table_models',
 ]
 pyc_files = [
     'omni_account',
